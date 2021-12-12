@@ -2,9 +2,9 @@ import React from 'react';
 
 const PokemonHeader = () => {
   return (
-    <div>
+    <React.Fragment>
       <h3>Desde Pokemon Header</h3>
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -25,7 +25,7 @@ const Navbar = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar color={'primary'} position='static'>
+      <AppBar color={'primary'} position='absolute'>
         <Toolbar>
           <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
             <MenuIcon />

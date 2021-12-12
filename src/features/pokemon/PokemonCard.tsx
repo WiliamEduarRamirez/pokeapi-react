@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Pokemon } from '../../app/models/Pokemon';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -37,6 +38,7 @@ const PokemonCard = ({ pokemon }: Props) => {
           image={pokemon.sprites.front_default}
           title={pokemon.name}
         />
+        <Divider />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
             {pokemon.name}
@@ -47,6 +49,7 @@ const PokemonCard = ({ pokemon }: Props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
+      <Divider />
       <CardActions>
         <Button size='small' color='primary'>
           Share

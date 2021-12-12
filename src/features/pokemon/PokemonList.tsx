@@ -1,37 +1,25 @@
 import React from 'react';
-import pokemonServices from '../../app/services/pokemon.services';
 import CustomCircularProgress from '../../app/common/components/CustomCircularProgress';
-import sleep from '../../app/common/functions/sleep';
 import { Pokemon } from '../../app/models/Pokemon';
 import { Grid } from '@material-ui/core';
 import PokemonCard from './PokemonCard';
+import { makeStyles } from '@material-ui/core/styles';
 
-const PokemonList = () => {
-  const [initialLoading, setInitialLoading] = React.useState(false);
-  const [pokemons, setPokemons] = React.useState<Pokemon[]>([]);
-  React.useEffect(() => {
-    loadPokemons();
-  }, []);
+const useStyles = makeStyles({
+  center: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '80vh'
+  }
+});
 
-  const loadPokemons = async () => {
-    setInitialLoading(true);
-    const axiosParams = new URLSearchParams();
-    axiosParams.append('limit', '10');
-    axiosParams.append('offset', '0');
-    try {
-      const response = await pokemonServices.list(axiosParams);
-      await sleep(5000);
-      const pokemonsData = await Promise.all(
-        response.results.map(async x => await pokemonServices.details(x.url))
-      );
-      setPokemons(pokemonsData);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setInitialLoading(false);
-    }
-  };
-
+interface Props {
+  pokemons: Pokemon[];
+  initialLoading: boolean;
+}
+const PokemonList = ({ pokemons, initialLoading }: Props) => {
+  const classes = useStyles();
   return (
     <React.Fragment>
       {!initialLoading ? (
@@ -45,14 +33,7 @@ const PokemonList = () => {
       ) : (
         <Grid container>
           <Grid xs={12} item>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '80vh'
-              }}
-            >
+            <div className={classes.center}>
               <CustomCircularProgress />
             </div>
           </Grid>
